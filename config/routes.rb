@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     devise_for :users, controllers: { sessions: :sessions },
                        path_names: { sign_in: :login }
     get 'users/get_profile', to: 'users#profile'
-    get 'users/tweets', to: 'users#tweets'
 
     resources :followers,only: [] do
       collection do

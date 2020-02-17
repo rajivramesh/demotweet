@@ -1,5 +1,5 @@
 class FollowersController < ApplicationController
-
+  before_action :authenticate_user!
   def follow
     if params[:following_id].blank?
       render json: {error: 'Please provide user whom to follow'}
