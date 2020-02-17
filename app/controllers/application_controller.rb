@@ -2,7 +2,9 @@ class ApplicationController < ActionController::Base
 
   #protect_from_forgery with: :exception
   protect_from_forgery with: :null_session
+
   before_action :authenticate_user
+  #before_action :authenticate_user!
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -30,7 +32,9 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!(options = {})
-    head :unauthorized unless signed_in?
+    unless params[:controller] == "sessions" || params[:action] == 'create'
+      head :unauthorized unless signed_in?
+    end
   end
 
   def current_user
